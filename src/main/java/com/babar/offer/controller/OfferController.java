@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping
 public class OfferController {
 
-    @ResponseBody
     @RequestMapping
     public String create() {
-        return "Create offers";
+        return "test";
     }
 }
