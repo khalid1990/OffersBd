@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping
 public class OfferController {
 
+    private static final String OFFER_FORM = "offer-form";
+
     @RequestMapping
     public String create() {
-        return "test";
+        return OFFER_FORM;
     }
 }

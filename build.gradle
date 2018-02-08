@@ -8,7 +8,7 @@ buildscript {
 }
 
 apply plugin: 'war' //required for tomcat-embed-jasper
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'OffersBd'
