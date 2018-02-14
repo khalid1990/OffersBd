@@ -1,11 +1,18 @@
 package com.babar.offer.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * @author sherlock
  * @since 2/13/18.
  */
+@Entity
 public class OfferType {
 
+    @Id
+    @GeneratedValue
     private int id;
 
     private String type;
