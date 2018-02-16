@@ -28,6 +28,10 @@ public class CommonService {
         return em.createQuery("FROM Company c", Company.class).getResultList();
     }
 
+    public List<OfferType> getAllOfferTypes() {
+        return em.createQuery("FROM OfferType ot", OfferType.class).getResultList();
+    }
+
     public Login findLogin(int id) {
         return em.find(Login.class, id);
     }

@@ -70,6 +70,18 @@
                         </div>
 
                         <div class="row">
+                            <form:label path="offer.offerType" cssClass="col-sm-2">
+                                <fmt:message key="label.offerType"/>
+                            </form:label>
+
+                            <form:select path="offer.offerType" cssClass="form-control col-sm-10">
+                                <form:options items="${offerTypes}"
+                                              itemLabel="type"
+                                              itemValue="id"/>
+                            </form:select>
+                        </div>
+
+                        <div class="row">
                             <form:label path="offer.fromDate" cssClass="col-sm-2">
                                 <fmt:message key="label.from.date"/>
                             </form:label>

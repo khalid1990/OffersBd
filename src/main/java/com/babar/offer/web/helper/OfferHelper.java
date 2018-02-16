@@ -29,5 +29,6 @@ public class OfferHelper {
         modelMap.put("offerCommand", createOfferCommand(offer));
 
         modelMap.put("companies", commonService.getAllCompanies());
+        modelMap.put("offerTypes", commonService.getAllOfferTypes());
     }
 }

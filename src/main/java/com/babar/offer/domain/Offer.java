@@ -22,8 +22,11 @@ public class Offer {
 
     private String imageUrl;
 
-    @OneToOne
+    @ManyToOne
     private Company company;
+
+    @ManyToOne
+    private OfferType offerType;
 
     private Date fromDate;
 
@@ -89,6 +92,14 @@ public class Offer {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public OfferType getOfferType() {
+        return offerType;
+    }
+
+    public void setOfferType(OfferType offerType) {
+        this.offerType = offerType;
     }
 
     public Date getFromDate() {
