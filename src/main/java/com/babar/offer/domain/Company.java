@@ -3,6 +3,7 @@ package com.babar.offer.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * @author sherlock

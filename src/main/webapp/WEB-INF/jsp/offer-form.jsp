@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -55,6 +55,19 @@
                         </div>
 
                         <!--image file-->
+
+                        <div class="row">
+                            <form:label path="offer.company" cssClass="col-sm-2">
+                                <fmt:message key="label.company"/>
+                            </form:label>
+
+                            <form:select path="offer.company" cssClass="form-control col-sm-10">
+                                <form:options items="${companies}"
+                                              itemLabel="name"
+                                              itemValue="id"/>
+                            </form:select>
+
+                        </div>
 
                         <div class="row">
                             <form:label path="offer.fromDate" cssClass="col-sm-2">

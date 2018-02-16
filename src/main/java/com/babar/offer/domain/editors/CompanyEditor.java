@@ -1,5 +1,8 @@
 package com.babar.offer.domain.editors;
 
+import com.babar.offer.domain.Company;
+import com.babar.offer.service.CommonService;
+
 import java.beans.PropertyEditorSupport;
 
 /**
@@ -7,13 +10,30 @@ import java.beans.PropertyEditorSupport;
  * @since 2/13/18.
  */
 public class CompanyEditor extends PropertyEditorSupport {
-    @Override
-    public String getAsText() {
-        return super.getAsText();
+
+    private CommonService commonService;
+
+    public CompanyEditor(CommonService commonService) {
+        this.commonService = commonService;
     }
 
     @Override
-    public void setAsText(String text) throws IllegalArgumentException {
-        super.setAsText(text);
+    public String getAsText() {
+        Company company = (Company) getValue();
+
+        if (company != null) {
+            int companyId = company.getId();
+            return String.valueOf(companyId);
+        }
+
+        return "";
+    }
+
+    @Override
+    public void setAsText(String text) {
+
+        int companyId = Integer.parseInt(text);
+        Company company = commonService.findCompany(companyId);
+        setValue(company);
     }
 }
