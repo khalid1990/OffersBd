@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <form:form action="index" method="post" commandName="offerCommand">
+                    <form:form action="index" method="post" commandName="offerCommand" enctype="multipart/form-data">
 
                         <div class="row">
                             <form:label cssClass="col-sm-2" path="offer.title">
@@ -55,6 +55,16 @@
                         </div>
 
                         <!--image file-->
+                        <div class="row">
+                            <c:if test="${offerCommand.offer.id == 0}">
+                                <div class="form-group form-inline">
+                                    <form:label path="imageFile" cssClass="col-sm-2">
+                                        <fmt:message key="label.upload.image"/>
+                                    </form:label>
+                                    <input type="file" name="imageFile" class="form-control"/>
+                                </div>
+                            </c:if>
+                        </div>
 
                         <div class="row">
                             <form:label path="offer.company" cssClass="col-sm-2">
@@ -66,7 +76,6 @@
                                               itemLabel="name"
                                               itemValue="id"/>
                             </form:select>
-
                         </div>
 
                         <div class="row">
@@ -95,6 +104,10 @@
                             </form:label>
 
                             <form:input path="offer.toDate" cssClass="form-control col-sm-10 date-field"/>
+                        </div>
+
+                        <div class="row">
+                            <input type="submit" name="_action_save" class="btn btn-primary" value="Save">
                         </div>
                     </form:form>
                 </div>

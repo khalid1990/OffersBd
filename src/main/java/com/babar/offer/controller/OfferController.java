@@ -4,10 +4,13 @@ import com.babar.offer.domain.Company;
 import com.babar.offer.domain.Offer;
 import com.babar.offer.domain.editors.CompanyEditor;
 import com.babar.offer.service.CommonService;
+import com.babar.offer.service.OfferService;
 import com.babar.offer.web.helper.OfferHelper;
+import com.babar.offer.web.model.OfferCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +35,9 @@ public class OfferController {
     @Autowired
     private CommonService commonService;
 
+    @Autowired
+    private OfferService offerService;
+
     @InitBinder(COMMAND_NAME)
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Company.class, new CompanyEditor(commonService));
@@ -44,9 +50,20 @@ public class OfferController {
         return OFFER_FORM;
     }
 
+    @PostMapping(value = "/index", params = "_action_save")
+    public String save(@ModelAttribute(COMMAND_NAME) OfferCommand command, BindingResult bindingResult) {
+
+        String imageUrl = helper.processUploadedImage(command.getImageFile());
+        Offer offer = command.getOffer();
+        offer.setImageUrl(imageUrl);
+        offerService.save(offer);
+
+        return OFFER_FORM;
+    }
+
     @GetMapping(value = "/show")
     public String show(@RequestParam int id, ModelMap modelMap) {
-        Offer offer = commonService.findOffer(id);
+        Offer offer = offerService.findOffer(id);
         helper.populateModel(modelMap, offer);
 
         return OFFER_SHOW_FORM;

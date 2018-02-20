@@ -165,4 +165,8 @@ public class Offer {
     public void setDownVote(long downVote) {
         this.downVote = downVote;
     }
+
+    public boolean isNew() {
+        return id == 0;
+    }
 }

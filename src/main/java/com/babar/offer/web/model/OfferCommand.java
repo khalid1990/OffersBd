@@ -1,6 +1,7 @@
 package com.babar.offer.web.model;
 
 import com.babar.offer.domain.Offer;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author sherlock
@@ -12,6 +13,8 @@ public class OfferCommand {
 
     private Offer offer;
 
+    private MultipartFile imageFile;
+
     public OfferCommand(Offer offer) {
         this.offer = offer;
     }
@@ -22,5 +25,13 @@ public class OfferCommand {
 
     public void setOffer(Offer offer) {
         this.offer = offer;
+    }
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 }

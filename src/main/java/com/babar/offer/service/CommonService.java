@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -28,8 +29,18 @@ public class CommonService {
         return em.createQuery("FROM Company c", Company.class).getResultList();
     }
 
-    public List<OfferType> getAllOfferTypes() {
-        return em.createQuery("FROM OfferType ot", OfferType.class).getResultList();
+    @Transactional
+    public void saveOrUpdateCompany(Company company) {
+        if (company.getId() == 0) {
+            em.persist(company);
+        } else {
+            em.merge(company);
+        }
+    }
+
+    @Transactional
+    public void deleteCompany(Company company) {
+        em.remove(company);
     }
 
     public Login findLogin(int id) {
@@ -39,7 +50,22 @@ public class CommonService {
     public OfferType findOfferType(int id) {
         return em.find(OfferType.class, id);
     }
-    public Offer findOffer(int id) {
-        return em.find(Offer.class, id);
+
+    public List<OfferType> getAllOfferTypes() {
+        return em.createQuery("FROM OfferType ot", OfferType.class).getResultList();
+    }
+
+    @Transactional
+    public void saveOrUpdateOfferType(OfferType offerType) {
+        if (offerType.getId() == 0) {
+            em.persist(offerType);
+        } else {
+            em.merge(offerType);
+        }
+    }
+
+    @Transactional
+    public void deleteOfferType(OfferType offerType) {
+        em.remove(offerType);
     }
 }
