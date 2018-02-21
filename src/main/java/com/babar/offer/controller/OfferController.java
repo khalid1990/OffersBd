@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author babar
  * @since 2/2/18.
@@ -26,6 +28,8 @@ public class OfferController {
     private static final String OFFER_FORM = "offer-form";
 
     private static final String OFFER_SHOW_FORM = "offer-show-form";
+
+    private static final String OFFER_LIST_VIEW = "offer-list-view";
 
     protected static final String COMMAND_NAME = "offerCommand";
 
@@ -50,13 +54,32 @@ public class OfferController {
         return OFFER_FORM;
     }
 
-    @PostMapping(value = "/index", params = "_action_save")
-    public String save(@ModelAttribute(COMMAND_NAME) OfferCommand command, BindingResult bindingResult) {
+    @GetMapping(value = "/edit")
+    public String edit(@RequestParam int id, ModelMap modelMap) {
+        Offer offer = offerService.findOffer(id);
+        helper.populateModel(modelMap, offer);
 
-        String imageUrl = helper.processUploadedImage(command.getImageFile());
+        return OFFER_FORM;
+    }
+
+    @GetMapping(value = "/list")
+    public String list(ModelMap modelMap) {
+        List<Offer> offers = offerService.getAllOffers();
+        modelMap.put("offers", offers);
+
+        return OFFER_LIST_VIEW;
+    }
+
+    @PostMapping(value = "/index", params = "_action_save")
+    public String saveOrUpdate(@ModelAttribute(COMMAND_NAME) OfferCommand command, BindingResult bindingResult) {
+
         Offer offer = command.getOffer();
-        offer.setImageUrl(imageUrl);
-        offerService.save(offer);
+        String imageUrl = helper.processUploadedImage(command.getImageFile());
+        if (command.getImageFile() != null) {
+            offer.setImageUrl(imageUrl);
+        }
+
+        offerService.saveOrUpdate(offer);
 
         return OFFER_FORM;
     }

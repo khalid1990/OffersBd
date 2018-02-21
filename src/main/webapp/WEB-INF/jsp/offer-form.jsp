@@ -54,16 +54,18 @@
                             <form:textarea path="offer.description" cssClass="form-control col-sm-10"/>
                         </div>
 
-                        <!--image file-->
                         <div class="row">
-                            <c:if test="${offerCommand.offer.id == 0}">
-                                <div class="form-group form-inline">
-                                    <form:label path="imageFile" cssClass="col-sm-2">
-                                        <fmt:message key="label.upload.image"/>
-                                    </form:label>
-                                    <input type="file" name="imageFile" class="form-control"/>
-                                </div>
-                            </c:if>
+                            <div class="form-group form-inline">
+                                <form:label path="imageFile" cssClass="col-sm-2">
+                                    <fmt:message key="label.upload.image"/>
+                                </form:label>
+
+                                <c:if test="${offerCommand.offer.id != 0}">
+                                    <img src="${offerCommand.offer.imageUrl}" height="32" width="32">
+                                </c:if>
+
+                                <input type="file" name="imageFile" class="form-control"/>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -107,7 +109,8 @@
                         </div>
 
                         <div class="row">
-                            <input type="submit" name="_action_save" class="btn btn-primary" value="Save">
+                            <input type="submit" name="_action_save" class="btn btn-primary"
+                                   value="${offer.id == 0 ? 'Save' : 'Update'}">
                         </div>
                     </form:form>
                 </div>
